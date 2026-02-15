@@ -39,11 +39,14 @@ def _resolve_spark_settings() -> dict:
         "spark.jars.packages": ",".join(package_list),
         "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
         "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
+        # Prevent truncated query plans in logs / explain()
+        "spark.sql.debug.maxToStringFields": "200",
         f"{spark_hadoop}.auth.type.{host}": "OAuth",
         f"{spark_hadoop}.oauth.provider.type.{host}": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
         f"{spark_hadoop}.oauth2.client.id.{host}": client_id,
         f"{spark_hadoop}.oauth2.client.secret.{host}": client_secret,
         f"{spark_hadoop}.oauth2.client.endpoint.{host}": f"https://login.microsoftonline.com/{tenant_id}/oauth2/token",
+        
     }
 
 

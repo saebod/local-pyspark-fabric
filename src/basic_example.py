@@ -45,6 +45,9 @@ spark = (
     .config(f"{spark_hadoop}.oauth2.client.secret.{host}", client_secret)
     .config(f"{spark_hadoop}.oauth2.client.endpoint.{host}",
             f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
+        # Avoid truncated plans in explain()/logs
+    .config("spark.sql.debug.maxToStringFields", "200")  # bump as needed
+
     .getOrCreate()
 )
 
@@ -52,11 +55,11 @@ spark = (
 
 # Replace  this with your lakehouse lakehouse_path
 lakehouse_path = f"abfss://localspark@onelake.dfs.fabric.microsoft.com/test_2.Lakehouse/Tables/"
+table_name:str='notebook_test_table'
 
-spark.sql("select Now() as dt").write.format("delta").save(lakehouse_path + "testing2", mode="overwrite")
-print(f"Written test data to {lakehouse_path}test_table")
-df = spark.read.format("delta").load(lakehouse_path + "testing")
+spark.sql("select Now() as dt").write.format("delta").save(lakehouse_path + table_name, mode="overwrite")
+print(f"Written test data to {lakehouse_path}{table_name}")
+df = spark.read.format("delta").load(lakehouse_path + table_name)
 print("Read back the data:")
-
 
 print(df.show())
