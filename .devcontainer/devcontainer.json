@@ -1,0 +1,14 @@
+{
+    "name": "Local Spark",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    // expose a few variables so you never have to type them again in python
+    "containerEnv": {
+        "AZ_TENANT_ID": "${localEnv:AZ_TENANT_ID}",
+        "AZ_CLIENT_ID":"${localEnv:AZ_CLIENT_ID}",
+        "AZ_CLIENT_SECRET": "${localEnv:AZ_CLIENT_SECRET}",
+        "LocalDevelopment": "1"
+    }
+}
