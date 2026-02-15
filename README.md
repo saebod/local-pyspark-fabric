@@ -45,7 +45,7 @@ This allows one notebook codebase to work both locally and in Fabric.
 
 ## Limitations
 - Local Spark settings may differ from Fabric runtime.
-- Attached-lakehouse SQL behavior may not match local usage.
+- Attached-lakehouse SQL behavior may not match local usage as we cannot attach a lakehouse to our pyspark.
 - Notebook metadata can break if edited carelessly in raw `notebook-content.py`.
 
 ## Ideas for next improvements
