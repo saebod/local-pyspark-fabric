@@ -22,7 +22,7 @@ RUN set -euo pipefail; \
 
 # Install Python deps
 RUN python -m pip install --upgrade pip \
-  && pip install --no-cache-dir pyspark==4.1.1 ipykernel
+  && pip install --no-cache-dir pyspark==4.0.1 ipykernel
 
 # Preinstall Azure jars
 RUN set -euo pipefail; \
