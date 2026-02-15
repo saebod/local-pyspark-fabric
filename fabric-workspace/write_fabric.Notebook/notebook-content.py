@@ -53,7 +53,7 @@ path = 'abfss://localspark@onelake.dfs.fabric.microsoft.com/lh_localspark.Lakeho
 
 from datetime import datetime
 df = spark.createDataFrame([(datetime.now(),)],schema=['time'])
-df.write.mode("overwrite").save(path)
+df.write.format("delta").mode("overwrite").save(path)
 print("this code was added from my local VS code editor and")
 
 # METADATA ********************
