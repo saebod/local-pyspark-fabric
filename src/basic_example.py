@@ -55,7 +55,7 @@ lakehouse_path = f"abfss://localspark@onelake.dfs.fabric.microsoft.com/test_2.La
 
 spark.sql("select Now() as dt").write.format("delta").save(lakehouse_path + "testing2", mode="overwrite")
 print(f"Written test data to {lakehouse_path}test_table")
-df = spark.read.load(lakehouse_path + "testing")
+df = spark.read.format("delta").load(lakehouse_path + "testing")
 print("Read back the data:")
 
 
